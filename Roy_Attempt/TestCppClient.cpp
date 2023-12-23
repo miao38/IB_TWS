@@ -83,10 +83,25 @@ void TestCppClient::processMessages()
 	/*****************************************************************/
     /* Below are few quick-to-test examples on the IB API functions grouped by functionality. Uncomment the relevant methods. */
     /*****************************************************************/
+    Contract c;
+    c.symbol = "AAPL";
+    c.secType = "Stocks";
+    c.exchange = "NASDAQ";
+    std::cout << "req historic data" << endl;
+    m_pClient->reqHistoricalData(1, c, "20231222 05:00:00", "1 M", "1 day", "MIDPOINT", 1, true, false, TagValueListSPtr());
 
 	m_osSignal.waitForSignal();
 	errno = 0;
+    std::cout << "process message" << endl;
 	m_pReader->processMsgs();
 }
 
-void TestCppClient::reqHistoricalTicks() {}
+void TestCppClient::historicalData(TickerId reqId, const Bar& bar)
+{
+    std::cout << "high: " << bar.high << endl;
+}
+
+void TestCppClient::error(int id, int errorCode, const std::string& errorString, const std::string& advancedOrderRejectJson)
+{
+    std::cout << "Error id: " << id << "\nError code: " << errorCode << "\nError String: " << errorString << endl;
+}

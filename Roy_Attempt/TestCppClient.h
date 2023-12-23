@@ -106,9 +106,6 @@ enum State
 
 class TestCppClient : public EWrapper
 {
-    private:
-        void reqHistoricalTicks();
-
     public:
         TestCppClient();
         ~TestCppClient();
@@ -146,7 +143,7 @@ class TestCppClient : public EWrapper
 		void contractDetailsEnd( int reqId) override {};
 		void execDetails( int reqId, const Contract& contract, const Execution& execution) override {};
 		void execDetailsEnd( int reqId) override {};
-		void error(int id, int errorCode, const std::string& errorString, const std::string& advancedOrderRejectJson) override {};
+		void error(int id, int errorCode, const std::string& errorString, const std::string& advancedOrderRejectJson) override;
 		void updateMktDepth(TickerId id, int position, int operation, int side,
 			double price, Decimal size) override {};
 		void updateMktDepthL2(TickerId id, int position, const std::string& marketMaker, int operation,
@@ -154,7 +151,7 @@ class TestCppClient : public EWrapper
 		void updateNewsBulletin(int msgId, int msgType, const std::string& newsMessage, const std::string& originExch) override {};
 		void managedAccounts( const std::string& accountsList) override {};
 		void receiveFA(faDataType pFaDataType, const std::string& cxml) override {};
-		void historicalData(TickerId reqId, const Bar& bar) override {};
+		void historicalData(TickerId reqId, const Bar& bar) override;
 		void historicalDataEnd(int reqId, const std::string& startDateStr, const std::string& endDateStr) override {};
 		void scannerParameters(const std::string& xml) override {};
 		void scannerData(int reqId, int rank, const ContractDetails& contractDetails,
