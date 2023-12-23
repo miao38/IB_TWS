@@ -7,7 +7,7 @@ SHARD_LIBS=${BASE_SRC_DIR}/libTwsSocketClient.so
 TARGET=Roy_IB_Client
 
 $(TARGET):
-	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BASE_SRC_DIR)/*.cpp ./*.cpp $(BASE_SRC_DIR)/lib/libbid.so -o$(TARGET)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BASE_SRC_DIR)/*.cpp ./*.cpp $(BASE_SRC_DIR)/lib/libbid.a -o$(TARGET)
 
 clean:
 	rm -f $(TARGET) *.o

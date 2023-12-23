@@ -19,17 +19,22 @@ int main()
     // const char* connectOptions = "";
     unsigned attempts = 0;
     printf("Start of C++ Socket Client Paper\n");
-    for(;;)
+    TestCppClient client;
+    while(attempts < 5)
     {
-        printf("Attempt #%d\n", attempts);
-        TestCppClient client;
         client.connect(host, port, client_id);
-        while(client.isConnected())
-            client.processMessages();
-        if(attempts >= MAX_ATTEMPTS)
+        if(client.isConnected())
             break;
         printf("Sleeping %u seconds before next attempt\n", SLEEP_TIME);
         this_thread::sleep_for(chrono::seconds(SLEEP_TIME));
+        attempts++;
+    }
+    if(client.isConnected())
+    {
+        for(;;)
+        {
+            client.processMessages();
+        } 
     }
     printf("End of C++ Socket Client Test\n");
 }
